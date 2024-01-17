@@ -1,4 +1,4 @@
-# react-native-signature-canvas
+# react-native-signature-canvas-extended
 
 [![](https://img.shields.io/npm/l/react-native-signature-canvas.svg)](https://www.npmjs.com/package/react-native-signature-canvas)
 [![](https://img.shields.io/npm/v/react-native-signature-canvas)](https://www.npmjs.com/package/react-native-signature-canvas)
@@ -9,93 +9,93 @@
 React Native Signature Component based Canvas for Android &amp;&amp; IOS &amp;&amp; expo
 
 - Supports Android and iOS and Expo
-- Tested with RN 0.69
+- Tested with RN 0.72.6
 - Core use [signature_pad.js](https://github.com/szimek/signature_pad)
 - Generates a base64 encoded png image of the signature
-  Note: Expo support for React Native Signature Canvas v1.5.0 started with Expo SDK v33.0.0.
+  Note: Expo support for React Native Signature Canvas Extended v1.0.0 started with Expo SDK v49.0.0.
 
-## Installation(for React Native V0.60.0 or Expo SDK v35.0.0)
+## Installation(for React Native V0.72.6 or Expo SDK v49.0.0)
 
 ```bash
-yarn add react-native-signature-canvas
+yarn add react-native-signature-canvas-extended
 ```
 
 or
 
 ```bash
-npm install --save react-native-signature-canvas
+npm install --save react-native-signature-canvas-extended
 ```
 
 > This package depends on [react-native-webview](https://github.com/react-native-webview/react-native-webview#readme) and it is particularly needed when you are using **_React Native CLI_**. To install `react-native-webview` follow the steps mentioned [here](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md)
 
-
-
-## Installation(for React Native V0.5x.x or Expo SDK < v33)
-
-```bash
-npm install --save react-native-signature-canvas@1.4.2
-```
-
 ## Usage
+
 Basic
+
 ```js
-import Signature from "react-native-signature-canvas";
+import Signature from "react-native-signature-canvas-extended";
 ```
+
 Custom
+
 ```js
-import SignatureScreen from 'react-native-signature-canvas';
+import SignatureScreen from "react-native-signature-canvas-extended";
 ```
 
 ## Properties
 
 ---
 
-| Prop                                |                   Type                   | Description                                                                                                                                          |
-|:------------------------------------|:----------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| androidHardwareAccelerationDisabled |                `boolean`                 | androidHardwareAccelerationDisabled for react-native-webview. Default is false                                                                       |
-| autoClear                           |                `boolean`                 | should auto clear the signature after clicking the Confirm button                                                                                    |
-| backgroundColor                     |                 `string`                 | default is "rgba(255,255,255,0)" (_transparent_), background color of the canvas                                                                     |
-| bgHeight                            |                 `number`                 | height of the background image                                                                                                                       |
-| bgWidth                             |                 `number`                 | width of the background image                                                                                                                        |
-| bgSrc                               |                 `string`                 | background image source uri (_url_)                                                                                                                  |
-| clearText                           |                 `string`                 | clear button text                                                                                                                                    |
-| confirmText                         |                 `string`                 | save button text                                                                                                                                     |
-| customHtml                          | `(injectedJavaScript: string) => string` | html string that lets you modify things like the layout or elements                                                                                  |
-| dataURL                             |                 `string`                 | default is "", Base64 string, draws saved signature from dataURL.                                                                                    |
-| descriptionText                     |                 `string`                 | description text for signature                                                                                                                       |
-| dotSize                             |                 `number`                 | radius of a single dot _(not stroke width)_                                                                                                          |
+| Prop                                |                   Type                   | Description                                                                                                                                           |
+| :---------------------------------- | :--------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| androidHardwareAccelerationDisabled |                `boolean`                 | androidHardwareAccelerationDisabled for react-native-webview. Default is false                                                                        |
+| autoClear                           |                `boolean`                 | should auto clear the signature after clicking the Confirm button                                                                                     |
+| btnBgColor                          |                 `string`                 | default is ""                                                                                                                                         |
+| btnTextColor                        |                 `string`                 | default is ""                                                                                                                                         |
+| padBgColor                          |                 `string`                 | default is "white"                                                                                                                                    |
+| padBorderRadius                     |                 `string`                 | default is "4px"                                                                                                                                      |
+| backgroundColor                     |                 `string`                 | default is "rgba(255,255,255,0)" (_transparent_), background color of the canvas                                                                      |
+| bgHeight                            |                 `number`                 | height of the background image                                                                                                                        |
+| bgWidth                             |                 `number`                 | width of the background image                                                                                                                         |
+| bgSrc                               |                 `string`                 | background image source uri (_url_)                                                                                                                   |
+| clearText                           |                 `string`                 | clear button text                                                                                                                                     |
+| confirmText                         |                 `string`                 | save button text                                                                                                                                      |
+| customHtml                          | `(injectedJavaScript: string) => string` | html string that lets you modify things like the layout or elements                                                                                   |
+| dataURL                             |                 `string`                 | default is "", Base64 string, draws saved signature from dataURL.                                                                                     |
+| descriptionText                     |                 `string`                 | description text for signature                                                                                                                        |
+| dotSize                             |                 `number`                 | radius of a single dot _(not stroke width)_                                                                                                           |
 | imageType                           |                 `string`                 | "image/png" (_default_), "image/jpeg"、"image/svg+xml", imageType of exported signature                                                               |
-| minWidth                            |                 `number`                 | minimum width of a line. Defaults to 0.5                                                                                                             |
-| maxWidth                            |                 `number`                 | maximum width of a line. Defaults to 2.5                                                                                                             |
-| onOK                                |                `function`                | callback function after saving non-empty signature                                                                                                   |
-| onEmpty                             |                `function`                | callback function after trying to save an empty signature                                                                                            |
-| onClear                             |                `function`                | callback function after clearing the signature                                                                                                       |
-| onGetData                           |                `function`                | callback function when getData() is called                                                                                                           
-| onBegin                             |                `function`                | callback function when a new stroke is started                                                                                                       |
-| onEnd                               |                `function`                | callback function when the stroke has ended                                                                                                          |
-| onLoadEnd                           |                `function`                | callback function when the webview canvas load ended                                                                                                 |
-| onUndo                              |                `function`                | callback function when undo() is called                                                                                                              |
-| onRedo                              |                `function`                | callback function when redo() is called                                                                                                              |
-| onDraw                              |                `function`                | callback function when drawing is enabled                                                                                                            |
-| onErase                             |                `function`                | callback function when erasing is enabled                                                                                                            |
-| onChangePenColor                    |                `function`                | callback function after changing the pen color                                                                                                       |
-| onChangePenSize                     |                `function`                | callback function after changing the pen size                                                                                                        
-| overlayHeight                       |                 `number`                 | height of the overlay image                                                                                                                          |
-| overlayWidth                        |                 `number`                 | width of the overlay image                                                                                                                           |
-| overlaySrc                          |                 `string`                 | overlay image source uri (url) _must be .png with a transparent background_                                                                          
-| penColor                            |                 `string`                 | default is "black", color of pen                                                                                                                     |
-| rotated                             |                `boolean`                 | rotate signature pad 90 degrees                                                                                                                      |
-| style                               |                 `object`                 | style of wrapper view                                                                                                                                |
-| trimWhitespace                      |                `boolean`                 | trim image whitespace                                                                                                                                |
+| minWidth                            |                 `number`                 | minimum width of a line. Defaults to 0.5                                                                                                              |
+| maxWidth                            |                 `number`                 | maximum width of a line. Defaults to 2.5                                                                                                              |
+| onOK                                |                `function`                | callback function after saving non-empty signature                                                                                                    |
+| onEmpty                             |                `function`                | callback function after trying to save an empty signature                                                                                             |
+| onClear                             |                `function`                | callback function after clearing the signature                                                                                                        |
+| onGetData                           |                `function`                | callback function when getData() is called                                                                                                            |
+| onBegin                             |                `function`                | callback function when a new stroke is started                                                                                                        |
+| onEnd                               |                `function`                | callback function when the stroke has ended                                                                                                           |
+| onLoadEnd                           |                `function`                | callback function when the webview canvas load ended                                                                                                  |
+| onUndo                              |                `function`                | callback function when undo() is called                                                                                                               |
+| onRedo                              |                `function`                | callback function when redo() is called                                                                                                               |
+| onDraw                              |                `function`                | callback function when drawing is enabled                                                                                                             |
+| onErase                             |                `function`                | callback function when erasing is enabled                                                                                                             |
+| onChangePenColor                    |                `function`                | callback function after changing the pen color                                                                                                        |
+| onChangePenSize                     |                `function`                | callback function after changing the pen size                                                                                                         |
+| overlayHeight                       |                 `number`                 | height of the overlay image                                                                                                                           |
+| overlayWidth                        |                 `number`                 | width of the overlay image                                                                                                                            |
+| overlaySrc                          |                 `string`                 | overlay image source uri (url) _must be .png with a transparent background_                                                                           |
+| penColor                            |                 `string`                 | default is "black", color of pen                                                                                                                      |
+| rotated                             |                `boolean`                 | rotate signature pad 90 degrees                                                                                                                       |
+| style                               |                 `object`                 | style of wrapper view                                                                                                                                 |
+| trimWhitespace                      |                `boolean`                 | trim image whitespace                                                                                                                                 |
 | webStyle                            |                 `string`                 | webview style for overwrite default style, all style: https://github.com/YanYuanFE/react-native-signature-canvas/blob/master/h5/css/signature-pad.css |
-| androidLayerType                            |         `none、software、hardware`         | Sets the android webview layerType |
+| androidLayerType                    |        `none、software、hardware`        | Sets the android webview layerType                                                                                                                    |
 
 ## Methods
 
 ---
 
 | Function                  | Description                                                                                     |
-| :--------------------     | :-----------------------------------------------------------------------------------------------|
+| :------------------------ | :---------------------------------------------------------------------------------------------- |
 | clearSignature()          | Clear the current signature                                                                     |
 | changePenColor(color)     | Change pen color                                                                                |
 | changePenSize(minW, maxW) | Change pen size                                                                                 |
@@ -156,13 +156,15 @@ const Sign = ({ text, onOK }) => {
 
 export default Sign;
 ```
+
 ## Using a background image
+
 You can use a non-erasable background image to draw your signature on using the `bgSrc` prop. Make sure to provide the width and height of the image.
 
 ```js
 const imgWidth = 300;
 const imgHeight = 200;
-const style = `.m-signature-pad {box-shadow: none; border: none; } 
+const style = `.m-signature-pad {box-shadow: none; border: none; }
               .m-signature-pad--body {border: none;}
               .m-signature-pad--footer {display: none; margin: 0px;}
               body,html {
@@ -181,13 +183,14 @@ const style = `.m-signature-pad {box-shadow: none; border: none; }
 ```
 
 ## Using an overlay image
+
 An overlay is a non-erasable image that can be used as a guideline similar to a colouring book. Make sure the image format is .png and that it has a transparent background. Also, don't forget to provide the width and height of the image.
 Use the `overlaySrc` prop to provide the link.
 
 ```js
 const imgWidth = 256;
 const imgHeight = 256;
-const style = `.m-signature-pad {box-shadow: none; border: none; } 
+const style = `.m-signature-pad {box-shadow: none; border: none; }
               .m-signature-pad--body {border: none;}
               .m-signature-pad--footer {display: none; margin: 0px;}
               body,html {
