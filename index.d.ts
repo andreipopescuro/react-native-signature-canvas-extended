@@ -1,12 +1,14 @@
-declare module "react-native-signature-canvas" {
+declare module "react-native-signature-canvas-extended" {
   import React from "react";
-  import {StyleProp, ViewStyle} from "react-native";
+  import { StyleProp, ViewStyle } from "react-native";
 
   type ImageType = "image/png" | "image/jpeg" | "image/svg+xml";
 
   type DataURL = "Base64" | string;
 
-  type ForwardRef<T, P> = React.ForwardRefExoticComponent<React.PropsWithoutRef<P> & React.RefAttributes<T>>;
+  type ForwardRef<T, P> = React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<P> & React.RefAttributes<T>
+  >;
 
   type SignatureViewProps = {
     androidHardwareAccelerationDisabled?: boolean;
@@ -34,8 +36,8 @@ declare module "react-native-signature-canvas" {
     onGetData?: (data: any) => void;
     onChangePenColor?: () => void;
     onChangePenSize?: () => void;
-    onChangeButtonsBackgroundColor?:  () => void;
-    onChangeButtonsTextColor? : () => void,
+    onChangeButtonsBackgroundColor?: () => void;
+    onChangeButtonsTextColor?: () => void;
     onBegin?: () => void;
     onEnd?: () => void;
     onLoadEnd?: () => void;
@@ -51,25 +53,24 @@ declare module "react-native-signature-canvas" {
     webviewContainerStyle?: StyleProp<ViewStyle>;
     androidLayerType?: "none" | "software" | "hardware";
 
-
     //custom
     buttonsBG?: string;
     buttonsTextColor?: string;
     bodyBgColor?: string;
     title?: string;
-    clearBtnBgColor? :string,
-    clearBtnTextColor? :string,
-    saveBtnBgColor?:string,
-    saveBtnTextColor? :string,
-    containerMarginTopPercent?: string,
-    padBgColor?: string,
-    buttonsWrapperBgColor?: string,
-    canvasWrapperHeight? :string,
-    bodyPaddingHorizontal? : string,
-    padBorderRadius? : string,
-    buttonsWrapperBorderTopColor?: string,
-    buttonsWrapperBorderTopWidth?: string,
-  }
+    clearBtnBgColor?: string;
+    clearBtnTextColor?: string;
+    saveBtnBgColor?: string;
+    saveBtnTextColor?: string;
+    containerMarginTopPercent?: string;
+    padBgColor?: string;
+    buttonsWrapperBgColor?: string;
+    canvasWrapperHeight?: string;
+    bodyPaddingHorizontal?: string;
+    padBorderRadius?: string;
+    buttonsWrapperBorderTopColor?: string;
+    buttonsWrapperBorderTopWidth?: string;
+  };
 
   export type SignatureViewRef = {
     changePenColor: (color: string) => void;
@@ -83,12 +84,11 @@ declare module "react-native-signature-canvas" {
     undo: () => void;
     redo: () => void;
 
-    
     // custom
     changeButtonsBackgroundColor: (color: string) => void;
     changeButtonsTextColor: (color: string) => void;
-  }
+  };
 
-  const SignatureView: ForwardRef<SignatureViewRef, SignatureViewProps>
+  const SignatureView: ForwardRef<SignatureViewRef, SignatureViewProps>;
   export default SignatureView;
 }
