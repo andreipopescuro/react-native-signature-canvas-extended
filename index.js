@@ -36,12 +36,12 @@ const SignatureView = forwardRef(
     {
       androidHardwareAccelerationDisabled = false,
       autoClear = false,
-      backgroundColor = "",
+      backgroundColor = "white",
       bgHeight = 0,
       bgWidth = 0,
       bgSrc = null,
       clearText = "Clear",
-      confirmText = "Confirm",
+      confirmText = "Save",
       customHtml = null,
       dataURL = "",
       descriptionText = "Sign above",
@@ -73,6 +73,25 @@ const SignatureView = forwardRef(
       webStyle = "",
       webviewContainerStyle = null,
       androidLayerType = "hardware",
+      // custom
+      onChangeButtonsBackgroundColor = () => {},
+      onChangeButtonsTextColor = () => {},
+      title = "Create a signature",
+      buttonsBG = "black",
+      buttonsTextColor = "white",
+      bodyBgColor = "black",
+      clearBtnBgColor = "",
+      clearBtnTextColor = "",
+      saveBtnBgColor = "",
+      saveBtnTextColor = "",
+      containerMarginTopPercent = "25%",
+      padBgColor = "white",
+      buttonsWrapperBgColor = "white",
+      buttonsWrapperBorderTopColor = "black",
+      buttonsWrapperBorderTopWidth = "2px",
+      canvasWrapperHeight = "300px",
+      bodyPaddingHorizontal = "0",
+      padBorderRadius = "4px",
     },
     ref
   ) => {
@@ -124,6 +143,33 @@ const SignatureView = forwardRef(
       html = html.replace(/<%confirm%>/g, confirmText);
       html = html.replace(/<%clear%>/g, clearText);
       html = html.replace(/<%orientation%>/g, rotated);
+
+      //custom
+      html = html.replace(/<%btnBgColor%>/g, buttonsBG);
+      html = html.replace(/<%btnTextColor%>/g, buttonsTextColor);
+      html = html.replace(/<%bodyBgColor%>/g, bodyBgColor);
+      html = html.replace(/<%title%>/g, title);
+      html = html.replace(/<%clearBtnBgColor%>/g, clearBtnBgColor);
+      html = html.replace(/<%clearBtnTextColor%>/g, clearBtnTextColor);
+      html = html.replace(/<%saveBtnBgColor%>/g, saveBtnBgColor);
+      html = html.replace(/<%saveBtnTextColor%>/g, saveBtnTextColor);
+      html = html.replace(
+        /<%containerMarginTopPercent%>/g,
+        containerMarginTopPercent
+      );
+      html = html.replace(/<%padBgColor%>/g, padBgColor);
+      html = html.replace(/<%buttonsWrapperBgColor%>/g, buttonsWrapperBgColor);
+      html = html.replace(/<%canvasWrapperHeight%>/g, canvasWrapperHeight);
+      html = html.replace(/<%bodyPaddingHorizontal%>/g, bodyPaddingHorizontal);
+      html = html.replace(/<%padBorderRadius%>/g, padBorderRadius);
+      html = html.replace(
+        /<%buttonsWrapperBorderTopColor%>/g,
+        buttonsWrapperBorderTopColor
+      );
+      html = html.replace(
+        /<%buttonsWrapperBorderTopWidth%>/g,
+        buttonsWrapperBorderTopWidth
+      );
 
       return { html };
     }, [
@@ -189,6 +235,12 @@ const SignatureView = forwardRef(
         case "CHANGE_PEN_SIZE":
           onChangePenSize();
           break;
+        case "CHANGE_BUTTON_BG":
+          onChangeButtonsBackgroundColor();
+          break;
+        case "CHANGE_BUTTON_TEXT":
+          onChangeButtonsTextColor();
+          break;
         default:
           isJson(e.nativeEvent.data)
             ? onGetData(e.nativeEvent.data)
@@ -248,6 +300,22 @@ const SignatureView = forwardRef(
             webViewRef.current.injectJavaScript("getData();true;");
           }
         },
+
+        // custom
+        changeButtonsBackgroundColor: (color) => {
+          if (webViewRef.current) {
+            webViewRef.current.injectJavaScript(
+              "changeButtonsBackgroundColor('" + color + "');true;"
+            );
+          }
+        },
+        changeButtonsTextColor: (color) => {
+          if (webViewRef.current) {
+            webViewRef.current.injectJavaScript(
+              "changeButtonsTextColor('" + color + "');true;"
+            );
+          }
+        },
       }),
       [webViewRef]
     );
@@ -256,9 +324,9 @@ const SignatureView = forwardRef(
       console.warn("WebView error: ", nativeEvent);
 
     const handleLoadEnd = () => {
-        setLoading(false);
-        onLoadEnd();
-    }
+      setLoading(false);
+      onLoadEnd();
+    };
 
     return (
       <View style={[styles.webBg, style]}>

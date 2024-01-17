@@ -34,6 +34,8 @@ declare module "react-native-signature-canvas" {
     onGetData?: (data: any) => void;
     onChangePenColor?: () => void;
     onChangePenSize?: () => void;
+    onChangeButtonsBackgroundColor?:  () => void;
+    onChangeButtonsTextColor? : () => void,
     onBegin?: () => void;
     onEnd?: () => void;
     onLoadEnd?: () => void;
@@ -48,6 +50,25 @@ declare module "react-native-signature-canvas" {
     webStyle?: string;
     webviewContainerStyle?: StyleProp<ViewStyle>;
     androidLayerType?: "none" | "software" | "hardware";
+
+
+    //custom
+    buttonsBG?: string;
+    buttonsTextColor?: string;
+    bodyBgColor?: string;
+    title?: string;
+    clearBtnBgColor? :string,
+    clearBtnTextColor? :string,
+    saveBtnBgColor?:string,
+    saveBtnTextColor? :string,
+    containerMarginTopPercent?: string,
+    padBgColor?: string,
+    buttonsWrapperBgColor?: string,
+    canvasWrapperHeight? :string,
+    bodyPaddingHorizontal? : string,
+    padBorderRadius? : string,
+    buttonsWrapperBorderTopColor?: string,
+    buttonsWrapperBorderTopWidth?: string,
   }
 
   export type SignatureViewRef = {
@@ -61,6 +82,11 @@ declare module "react-native-signature-canvas" {
     readSignature: () => void;
     undo: () => void;
     redo: () => void;
+
+    
+    // custom
+    changeButtonsBackgroundColor: (color: string) => void;
+    changeButtonsTextColor: (color: string) => void;
   }
 
   const SignatureView: ForwardRef<SignatureViewRef, SignatureViewProps>
